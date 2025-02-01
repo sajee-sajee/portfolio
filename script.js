@@ -81,3 +81,11 @@ function showCertificate(imageSrc, title, issuer, date) {
       hideCertificate();
     }
   }
+  window.addEventListener('scroll', function() {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) { // Adjust scroll threshold as needed
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
