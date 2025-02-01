@@ -22,10 +22,22 @@
   }
 
   nav {
-    position: relative;
-    padding-left: 100px; /* Make space for the logo */
+    padding: 20px;
+    text-align: center;
+    background: rgba(10, 25, 47, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease; /* Smooth transition for changes */
+    border-radius: 0;  /* Make space for the logo */
   }
-
+  nav.scrolled {
+    border-radius: 50px; /* Rounded edges */
+    background: rgba(23, 42, 69, 0.9); /* Slightly darker background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+}
   .nav-logo:hover {
     transform: scale(1.1);
   }
@@ -63,6 +75,8 @@
     width: 100%;
     top: 0;
     z-index: 1000;
+    transition: all 0.3s ease; /* Smooth transition for changes */
+    border-radius: 0;
   }
   
   nav {
@@ -95,7 +109,7 @@
   nav a:hover::after {
     width: 100%;
     left: 0;
-  }
+}
   
   nav a::before {
     content: '';
