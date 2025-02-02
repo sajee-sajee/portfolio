@@ -11,12 +11,12 @@
     overflow-x: hidden;
   }
 
-  /* logo */
+  
   .nav-logo {
     position: absolute;
     left: 20px;
     top: 10px;
-    height: 40px; /* Adjust based on your logo size */
+    height: 40px; 
     width: auto;
     transition: transform 0.3s ease;
   }
@@ -30,13 +30,13 @@
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: all 0.3s ease; /* Smooth transition for changes */
-    border-radius: 0;  /* Make space for the logo */
+    transition: all 0.3s ease; 
+    border-radius: 0;  
   }
   nav.scrolled {
-    border-radius: 50px; /* Rounded edges */
-    background: rgba(23, 42, 69, 0.9); /* Slightly darker background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    border-radius: 50px; 
+    background: rgba(23, 42, 69, 0.9); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
   .nav-logo:hover {
     transform: scale(1.1);
@@ -75,7 +75,7 @@
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: all 0.3s ease; /* Smooth transition for changes */
+    transition: all 0.3s ease; 
     border-radius: 0;
   }
   
@@ -399,7 +399,7 @@
     color: #28e5d8;
   }
   
-  /* Dark overlay */
+  
   .overlay {
     display: none;
     position: fixed;
