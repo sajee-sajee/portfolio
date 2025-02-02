@@ -1,4 +1,4 @@
-// Intersection Observer for scroll animations
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -13,54 +13,8 @@ const observer = new IntersectionObserver((entries) => {
     card.style.transform = 'translateY(50px)';
     observer.observe(card);
   });
-//   // Certificate Overview functionality
-// document.querySelectorAll('.certificate-title').forEach(title => {
-//     title.addEventListener('click', (e) => {
-//       const overview = e.target.closest('.certificate-item').querySelector('.certificate-overview');
-//       const overlay = document.createElement('div');
-//       overlay.className = 'overlay active';
-      
-//       document.body.appendChild(overlay);
-//       overview.classList.add('active');
-      
-//       // Close functionality
-//       const closeBtn = overview.querySelector('.close-btn');
-//       const closeAll = () => {
-//         overview.classList.remove('active');
-//         overlay.remove();
-//       };
-      
-//       closeBtn.addEventListener('click', closeAll);
-//       overlay.addEventListener('click', closeAll);
-      
-//       // Prevent closing when clicking inside the overview
-//       overview.addEventListener('click', (event) => {
-//         event.stopPropagation();
-//       });
-//     });
-//   });
-  
-  // Add this to your existing Intersection Observer code
-//   document.querySelectorAll('.certificate-item').forEach((item) => {
-//     item.style.opacity = 0;
-//     item.style.transform = 'translateY(50px)';
-//     observer.observe(item);
-//   });
-//   function showCertificate() {
-//     document.getElementById('certificateContainer').style.display = 'block';
-// }
 
-// function hideCertificate() {
-//     document.getElementById('certificateContainer').style.display = 'none';
-// }
 
-// // Close when clicking outside the certificate
-// window.onclick = function(event) {
-//     const container = document.getElementById('certificateContainer');
-//     if (event.target === container) {
-//         hideCertificate();
-//     }
-// }
 function showCertificate(imageSrc, title, issuer, date) {
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('certificateContainer').style.display = 'block';
@@ -75,7 +29,7 @@ function showCertificate(imageSrc, title, issuer, date) {
     document.getElementById('certificateContainer').style.display = 'none';
   }
 
-  // Close modal when clicking outside
+  
   window.onclick = function(event) {
     if (event.target === document.getElementById('overlay')) {
       hideCertificate();
@@ -83,7 +37,7 @@ function showCertificate(imageSrc, title, issuer, date) {
   }
   window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav');
-    if (window.scrollY > 50) { // Adjust scroll threshold as needed
+    if (window.scrollY > 50) { 
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
