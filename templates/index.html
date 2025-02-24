@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis 2.0</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div class="chat-interface">
+        <header class="chat-header">
+            <div class="header-title">
+                <span class="jarvis-text">Jarvis 2.0</span>
+            </div>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </header>
+        <div id="chat-box" class="chat-box">
+            <div class="bot-message message-wrapper">Greetings! I’m Jarvis 2.0, your AI assistant. How can I assist you today?</div>
+        </div>
+        <form id="chat-form" class="chat-input">
+            <input type="text" id="message" name="message" placeholder="Ask me anything..." autocomplete="off">
+            <label class="file-upload">
+                <input type="file" id="file-input" name="file" accept=".txt,.pdf,.png,.jpg,.jpeg">
+                <span>📎</span>
+            </label>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('chat-form');
+        const chatBox = document.getElementById('chat-box');
+        const messageInput = document.getElementById('message');
+        const fileInput = document.getElementById('file-input');
+
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `${isUser ? 'user' : 'bot'}-message message-wrapper`;
+            messageDiv.innerHTML = message;
+
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'loading-indicator';
+            loadingIndicator.innerHTML = `
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            `;
+
+            if (isUser) {
+                chatBox.appendChild(messageDiv);
+                chatBox.appendChild(loadingIndicator);
+            } else {
+                chatBox.removeChild(chatBox.querySelector('.loading-indicator'));
+                chatBox.appendChild(messageDiv);
+            }
+
+            setTimeout(() => {
+                messageDiv.style.opacity = '1';
+                messageDiv.style.transform = 'translateY(0)';
+            }, 50);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = messageInput.value.trim();
+            const file = fileInput.files[0];
+            if (!userMessage && !file) return;
+
+            let displayMessage = userMessage;
+            if (file) {
+                displayMessage += displayMessage ? `<br>Attached: ${file.name}` : `Attached: ${file.name}`;
+            }
+            addMessage(displayMessage, true);
+            messageInput.value = '';
+            fileInput.value = '';
+
+            const formData = new FormData();
+            if (userMessage) formData.append('message', userMessage);
+            if (file) formData.append('file', file);
+
+            try {
+                const response = await fetch('/send_message', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                addMessage(data.response, false);
+            } catch (error) {
+                addMessage("Sorry, I’m having trouble connecting.", false);
+            }
+        });
+    </script>
+</body>
+</html>
