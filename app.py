@@ -3,22 +3,22 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 import os
 from functools import wraps
 
-# Configure the Gemini API
-api_key = "AIzaSyCU8rZOHLLLFLuRIaFJTO3bNWerFAYopJE"  # Replace with your actual key
+
+api_key = "AIzaSyCU8rZOHLLLFLuRIaFJTO3bNWerFAYopJE"  
 genai.configure(api_key=api_key)
 
-# Initialize the models and chat session
+
 model_text = genai.GenerativeModel('gemini-pro')
 model_vision = genai.GenerativeModel('gemini-pro-vision')
 chat = model_text.start_chat(history=[])
 
 app = Flask(__name__)
-app.secret_key = 'os.urandom(24)'  # Replace with a secure random key
+app.secret_key = 'os.urandom(24)'  
 
-# Dummy user for demo
+
 VALID_CREDENTIALS = {'email': 'user@example.com', 'password': 'password123'}
 
-# Login required decorator
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -37,7 +37,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        print(f"Received: email={email}, password={password}")  # Debug
+        print(f"Received: email={email}, password={password}")  
         
         if email == VALID_CREDENTIALS['email'] and password == VALID_CREDENTIALS['password']:
             session['logged_in'] = True
@@ -63,13 +63,13 @@ def send_message():
     
     try:
         if file:
-            # Save file temporarily
+           
             file_path = os.path.join('uploads', file.filename)
             os.makedirs('uploads', exist_ok=True)
             file.save(file_path)
             print(f"File uploaded: {file.filename}, MIME type: {file.mimetype}")  # Debug
 
-            # Process based on file type
+  
             if file.mimetype.startswith('image/'):
                 with open(file_path, 'rb') as img_file:
                     img_content = img_file.read()
@@ -82,9 +82,9 @@ def send_message():
             else:
                 custom_response = "I am Jarvis: I can only process images (.png, .jpg, .jpeg), text files (.txt), or PDFs (.pdf)."
             
-            os.remove(file_path)  # Clean up
+            os.remove(file_path)  
         else:
-            # Text-only input
+        
             response = chat.send_message(user_input)
             raw_response = response.text
             if "who are you" in user_input.lower():
@@ -98,7 +98,7 @@ def send_message():
 
         return jsonify({'response': custom_response})
     except Exception as e:
-        print(f"Error: {str(e)}")  # Debug
+        print(f"Error: {str(e)}") 
         return jsonify({'response': f"I am Jarvis: Error processing your request - {str(e)}"})
 
 if __name__ == '__main__':
