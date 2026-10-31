@@ -6,21 +6,21 @@ A complete static portfolio with an actual Three.js 3D room, animated door, scro
 
 Install Python 3, open a terminal in this directory, and run:
 
-    python3 -m http.server 8000 --directory dist
+    python3 -m http.server 8000
 
-On Windows you may use `py -m http.server 8000 --directory dist`.
+On Windows you may use `py -m http.server 8000`.
 Open http://localhost:8000 in your browser. Use a local server instead of opening index.html directly, because JavaScript modules require HTTP.
 
 ## Files
 
-- `dist/index.html`: document, entrance text and monitor workspace.
-- `dist/style.css`: responsive layout, typography and interface styling.
-- `dist/app.js`: project content, interaction logic, scene geometry and camera animation.
-- `dist/vendor/`: included Three.js module files and MIT license.
+- `index.html`: document, entrance text and monitor workspace.
+- `style.css`: responsive layout, typography and interface styling.
+- `app.js`: project content, interaction logic, scene geometry and camera animation.
+- `vendor/`: included Three.js module files and MIT license.
 
 ## Customize
 
-Edit the `projects` array at the top of `dist/app.js` to change project names, descriptions, technologies, highlights, and GitHub URLs. Edit the `view` function to change your overview, skills, and biography. Room geometry is in the procedural scene section; measurements use Three.js world units. Theme colors are CSS variables in `dist/style.css`. LinkedIn, GitHub, and contact email use the details supplied by Sajeesh. Email links open the visitor’s email app; this site does not send or store messages.
+Edit the `projects` array at the top of `app.js` to change project names, descriptions, technologies, highlights, and GitHub URLs. Edit the `view` function to change your overview, skills, and biography. Room geometry is in the procedural scene section; measurements use Three.js world units. Theme colors are CSS variables in `style.css`. LinkedIn, GitHub, and contact email use the details supplied by Sajeesh. Email links open the visitor’s email app; this site does not send or store messages.
 
 ## Featured projects
 
@@ -39,7 +39,7 @@ Scroll or use Step inside to enter the room. Continue scrolling or choose Explor
 
 ## Deployment
 
-Serve the contents of `dist` on any static web host. No backend is required. The published portfolio is at https://sajeesh-interactive-studio.sajeeshsarang087.chatgpt.site. Fonts load from Google Fonts when available and fall back to local sans-serif fonts otherwise.
+Serve the repository root on any static web host. No backend is required. The published portfolio is at https://sajeesh-interactive-studio.sajeeshsarang087.chatgpt.site. Fonts load from Google Fonts when available and fall back to local sans-serif fonts otherwise.
 
 ## Checks
 
@@ -47,4 +47,4 @@ Application JavaScript syntax was validated with Node.js. Browser checks verifie
 
 ## License
 
-Your custom source is editable and reusable. Three.js is MIT licensed; retain `dist/vendor/THREE-LICENSE.txt` when distributing it.
+Your custom source is editable and reusable. Three.js is MIT licensed; retain `vendor/THREE-LICENSE.txt` when distributing it.
